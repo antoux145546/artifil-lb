@@ -1,48 +1,267 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Index</title>
-  <style>
-    body{
-      margin:0;
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:#0f1115;
-      color:rgba(255,255,255,.92);
-    }
-    .card{
-      width:min(820px, 92vw);
-      padding:26px 22px;
-      border-radius:18px;
-      background: rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 18px 60px rgba(0,0,0,0.40);
-    }
-    h1{ margin:0 0 10px; font-size:28px; }
-    p{ margin:0; color:rgba(255,255,255,0.78); line-height:1.5; }
-    a.btn{
-      display:inline-block;
-      margin-top:18px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.92);
-      text-decoration:none;
-      font-weight:700;
-    }
-    a.btn:hover{ background: rgba(255,255,255,0.11); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artifil — Handmade Crochet</title>
+
+<style>
+:root{
+  /* Burger-inspired colors */
+  --bun:#d19a5a;
+  --bun-dark:#b67c3c;
+  --cheese:#f6d365;
+  --lettuce:#7fbf9b;
+
+  --bg:#0e0b07;
+  --bg-soft:#18120b;
+  --card:#1f170d;
+
+  --text:#f4f1ec;
+  --muted:#cbbfae;
+  --border:rgba(255,255,255,.12);
+
+  --radius:20px;
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(214,165,95,.25) 0%, transparent 55%),
+    radial-gradient(900px 600px at 80% 80%, rgba(127,191,155,.18) 0%, transparent 55%),
+    linear-gradient(180deg,var(--bg),var(--bg-soft));
+}
+
+a{color:inherit;text-decoration:none}
+.container{width:min(1100px,92vw);margin:auto}
+
+/* ===== NAV ===== */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(24,18,11,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:2px solid var(--bun-dark);
+}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+}
+
+/* TEXT LOGO ONLY */
+.logo{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+/* ===== EXPANDING MENU ===== */
+.menu{
+  display:flex;
+  gap:10px;
+}
+
+/* Button base */
+.menu a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:44px;
+  padding:10px;
+  overflow:hidden;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--bun),var(--bun-dark));
+  font-weight:800;
+  white-space:nowrap;
+  transition:.25s ease;
+}
+
+/* Icon */
+.menu .icon{
+  font-size:16px;
+  flex-shrink:0;
+}
+
+/* Text hidden by default */
+.menu .label{
+  opacity:0;
+  transform:translateX(-6px);
+  transition:.25s ease;
+}
+
+/* Hover & focus expand (desktop + mobile tap) */
+.menu a:hover,
+.menu a:focus-within{
+  width:160px;
+}
+
+.menu a:hover .label,
+.menu a:focus-within .label{
+  opacity:1;
+  transform:none;
+}
+
+/* Mobile safety */
+@media(max-width:768px){
+  .menu a{
+    width:auto;
+    padding:10px 14px;
+  }
+  .menu .label{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ===== HERO ===== */
+.hero{
+  padding:80px 0 50px;
+}
+.hero-card{
+  max-width:720px;
+  background:linear-gradient(180deg,#261a10,#1b140c);
+  border:2px solid var(--bun-dark);
+  border-radius:var(--radius);
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+.hero h1{
+  margin:0;
+  font-size:clamp(34px,4vw,48px);
+}
+.hero p{
+  margin:18px 0 26px;
+  color:var(--muted);
+  font-weight:600;
+  line-height:1.5;
+}
+.btn{
+  display:inline-block;
+  padding:14px 26px;
+  border-radius:999px;
+  font-weight:900;
+  background:linear-gradient(180deg,var(--cheese),#f1c84a);
+  color:#1a1205;
+}
+
+/* ===== SECTIONS ===== */
+section{padding:40px 0}
+h2{margin:0 0 18px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:18px;
+}
+.card{
+  grid-column:span 4;
+  background:linear-gradient(180deg,#24180f,#1a120a);
+  border:2px solid var(--bun-dark);
+  border-radius:var(--radius);
+  padding:22px;
+}
+@media(max-width:900px){.card{grid-column:span 6}}
+@media(max-width:600px){.card{grid-column:span 12}}
+
+.card h3{margin:6px 0 8px}
+.card p{color:var(--muted);font-weight:600}
+
+/* FOOTER */
+footer{
+  padding:40px 0;
+  text-align:center;
+  color:var(--muted);
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Bienvenue ✅</h1>
-    <p>Voici ton index. Remplace ce contenu par ton vrai site.</p>
-    <a class="btn" href="loader.html">Revoir le loader</a>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="logo">Artifil</div>
+
+    <div class="menu">
+      <a href="#collections">
+        <span class="icon">📦</span>
+        <span class="label">Collections</span>
+      </a>
+      <a href="#about">
+        <span class="icon">ℹ️</span>
+        <span class="label">About</span>
+      </a>
+      <a href="https://www.instagram.com/artifil.lb" target="_blank">
+        <span class="icon">📸</span>
+        <span class="label">Instagram</span>
+      </a>
+    </div>
   </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-card">
+      <h1>Handmade crochet, crafted with warmth.</h1>
+      <p>
+        Artifil creates handmade crochet pieces inspired by warmth,
+        comfort and attention to detail.
+      </p>
+      <a class="btn" href="products.html">
+        View all products
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- COLLECTIONS -->
+<section id="collections">
+  <div class="container">
+    <h2>Collections</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Amigurumi</h3>
+        <p>Handmade crochet animals and characters.</p>
+      </div>
+      <div class="card">
+        <h3>Accessories</h3>
+        <p>Keychains and crochet accessories.</p>
+      </div>
+      <div class="card">
+        <h3>Seasonal</h3>
+        <p>Limited editions and special collections.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2>About Artifil</h2>
+    <p class="muted">
+      Artifil is a handmade crochet brand focused on quality,
+      warmth and custom-made creations.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © <span id="y"></span> Artifil — Handmade Crochet
+</footer>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
